@@ -1,0 +1,113 @@
+DDL and Insert Statements for the Recipe Database
+
+
+CREATE TABLE Users
+		(UserID		NUMERIC 		NOT NULL,
+	 	FirstName		VARCHAR(25),
+		LastName		VARCHAR(25),
+		CONSTRAINT User_PK PRIMARY KEY (UserID));
+
+
+CREATE TABLE Recipes
+(RecipeID NUMERIC NOT NULL,
+RecipeName VARCHAR(30),
+UserID	NUMERIC 	NOT NULL,
+Instructions TEXT,
+DatePosted TIMESTAMP,
+CONSTRAINT Recipe_PK PRIMARY KEY(RecipeID),
+CONSTRAINT Recipe_FK FOREIGN KEY (UserID) REFERENCES Users (UserID));
+
+CREATE TABLE Categories
+		(CategoryID			NUMERIC		NOT NULL,
+     		CategoryName		VARCHAR(15),
+			CONSTRAINT Category_PK PRIMARY KEY (CategoryID));
+
+CREATE TABLE Ingredients
+		(IngredientID			NUMERIC		NOT NULL,
+     		IngredientName		VARCHAR(15),
+			CONSTRAINT Ingredient_PK PRIMARY KEY (IngredientID));
+
+CREATE TABLE SavedRecipes
+		(RecipeID		NUMeric 		NOT NULL ,
+    		UserID			NUMERIC		NOT NULL,
+		
+		CONSTRAINT SavedRecipe_PK PRIMARY KEY (RecipeID,UserID),
+CONSTRAINT SavedRecipeRecipe_FK FOREIGN KEY (RecipeID) REFERENCES Recipes (RecipeID),
+CONSTRAINT SavedRecipeUser_FK FOREIGN KEY (UserID) REFERENCES Users (UserID));
+
+CREATE TABLE IsIn
+		(RecipeID		NUMeric 		NOT NULL ,
+    		CategoryID			NUMERIC		NOT NULL,
+		
+		CONSTRAINT IsIn_PK PRIMARY KEY (RecipeID,CategoryID),
+CONSTRAINT RecipeIsIn_FK FOREIGN KEY (RecipeID) REFERENCES Recipes (RecipeID),
+CONSTRAINT IsInCategory_FK FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID));
+
+CREATE TABLE Contains
+		(RecipeID		NUMeric 		NOT NULL ,
+    		IngredientID			NUMERIC		NOT NULL,
+		
+		CONSTRAINT Contains_PK PRIMARY KEY (RecipeID,IngredientID),
+CONSTRAINT RecipeContains_FK FOREIGN KEY (RecipeID) REFERENCES Recipes (RecipeID),
+CONSTRAINT ContainsIngredient_FK FOREIGN KEY (IngredientID) REFERENCES Ingredients(IngredientID));
+
+
+insert into users
+(UserID,FirstName,LastName)
+Values 
+(10000,'Charlotte', 'Cook'),
+(10001,'Wanda', 'Wasser'),
+(10002,'Amy', 'Shweet'),
+(10003,'Kaila', 'Haste');
+Insert into recipes
+(RecipeID,RecipeName,UserID,Instructions,DatePosted,PhotoLink)
+VALUES
+(1111,'Carrot Ginger Soup',10003,
+'1.	Press the saute button on your Instant Pot. Once it displays hot, add oil and then add the chopped ginger and onion.
+2.	Saute the ginger and onion for 2 minutes until softened. Stir in the carrots.
+3.	Add cumin powder, smoked paprika, black pepper, salt and mix well. Add vegetable stock or water. Close the pot with the lid. 
+4.	Press the manual or pressure cook button and cook on high pressure for 5 minutes, make sure the pressure valve is in sealing position.
+5.	Let the pressure release naturally for 5 minutes and then do a quick pressure release.
+6.	Open the lid and blend the ingredients to a smooth soup using an immersion blender. If you don\'t have an immersion blender, let the contents in the pot cool down a bit and then blend using your regular blender.
+7.	Transfer soup to serving bowls, garnish with cilantro and serve.', NOW());
+
+insert into categories
+(CategoryID,CategoryName)
+values
+(1,'Soups'),
+(2, 'Salads'),
+(3,'Desserts'),
+(4,'Mains');
+
+insert into ingredients
+(IngredientID,IngredientName)
+VAlUES
+(1,'olive oil'),
+(2,'chopped ginger'),
+(3,'onion'),
+(4,'carrots'),
+(5,'chili powder'),
+(6,'paprika'),
+(7,'black pepper'),
+(8,'vegetable broth');
+
+insert into savedrecipes
+(RecipeID,UserID)
+VALUES
+(1111,10003);
+
+insert into isin
+(RecipeID,CategoryID)
+VALUES
+(1111,1);
+
+insert into contains
+(RecipeID,IngredientID)
+VALUES
+(1111,1),
+(1111,2),
+(1111,3),
+(1111,4),
+(1111,5),
+(1111,6);
+

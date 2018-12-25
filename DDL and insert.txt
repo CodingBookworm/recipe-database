@@ -60,7 +60,7 @@ Values
 (10002,'Amy', 'Shweet'),
 (10003,'Kaila', 'Haste');
 Insert into recipes
-(RecipeID,RecipeName,UserID,Instructions,DatePosted,PhotoLink)
+(RecipeID,RecipeName,UserID,Instructions,DatePosted)
 VALUES
 (1111,'Carrot Ginger Soup',10003,
 '1.	Press the saute button on your Instant Pot. Once it displays hot, add oil and then add the chopped ginger and onion.

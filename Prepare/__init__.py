@@ -12,7 +12,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
-from Prepare import routes
-from Prepare import models
+from prepare import routes
+from prepare import models
 
 models.db.create_all()

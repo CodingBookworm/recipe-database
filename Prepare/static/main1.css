@@ -103,11 +103,31 @@ h1 {
   font-weight: 300;
 }
 
-
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
 .card {
-  float: left;
-  width: 30%;
+  flex: 0 1 100%;
+}
+@media screen and (min-width: 40em) {
+  .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+  }
+
+  .card {
+      flex: 0 1 calc(50%);
+  }
+}
+
+@media screen and (min-width: 60em) {
+  .card {
+      flex: 0 1 calc(25%);
+  }
 }
 
 .card .menu-content {
@@ -146,7 +166,7 @@ h1 {
 
 .card .wrapper {
   background-color: #fff;
-  min-height: 540px;
+  height: 350px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
@@ -335,3 +355,4 @@ h1 {
 .fas {
   font-size: xx-large;
 }
+
